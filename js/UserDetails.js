@@ -12,6 +12,11 @@ export default class UserDetails extends Component {
     console.log("Did receive message");
     console.log(aMsg);
   }
+
+  componentWillUnmount() {
+    this.NativeMsgSubscription.remove();
+  }
+
   render() {
     var { NativeAppEventEmitter } = require('react-native');
     this.NativeMsgSubscription = NativeAppEventEmitter.addListener(
