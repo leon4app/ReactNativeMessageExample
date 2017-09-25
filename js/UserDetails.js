@@ -5,6 +5,7 @@ import {
   Text,
   View
 } from 'react-native';
+var { NativeAppEventEmitter } = require('react-native');
 
 export default class UserDetails extends Component {
 
@@ -12,19 +13,21 @@ export default class UserDetails extends Component {
     console.log("Did receive message");
     console.log(aMsg);
   }
-
-  componentWillUnmount() {
-    this.NativeMsgSubscription.remove();
-  }
-
-  render() {
-    var { NativeAppEventEmitter } = require('react-native');
-    this.NativeMsgSubscription = NativeAppEventEmitter.addListener(
+  componentWillMount() {
+    console.log("WillMount");
+    this.subscription = NativeAppEventEmitter.addListener(
       'UserDidLoginMsg', (reminder) =>
       {
         this.handleNativeMsg(reminder.message);
       }
     )
+  }
+  componentWillUnmount() {
+    console.log("WillUnmount");
+    this.subscription.remove();
+  }
+
+  render() {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
