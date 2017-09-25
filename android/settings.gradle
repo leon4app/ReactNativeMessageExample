@@ -1,0 +1,3 @@
+rootProject.name = 'AthenaMessageExample'
+
+include ':app'
