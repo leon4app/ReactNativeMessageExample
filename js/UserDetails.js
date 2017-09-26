@@ -8,10 +8,20 @@ import {
 var { NativeAppEventEmitter } = require('react-native');
 
 export default class UserDetails extends Component {
+  constructor(props){
+        super(props);
+        this.state = ({
+          username:"Waiting for user to login...",
+        });
+    }
 
   handleNativeMsg = ( aMsg ) => {
     console.log("Did receive message");
     console.log(aMsg);
+    this.setState({
+            username:aMsg.username,
+            nickname:aMsg.nickname,
+        });
   }
   componentWillMount() {
     console.log("WillMount");
@@ -31,8 +41,9 @@ export default class UserDetails extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
-          Waiting for user to login...
+          {this.state.username}
         </Text>
+        <Text style={styles.welcome}>{this.state.nickname}</Text>
       </View>
     );
   }
