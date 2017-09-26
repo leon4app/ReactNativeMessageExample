@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+__attribute((deprecated("Demand is not clear")))
 @interface ATNAthena : NSObject
 
 @end
